@@ -8,6 +8,10 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 
+error_reporting(0); // Disable all error reporting
+ini_set('display_errors', 0); // Hide errors from being displayed
+ini_set('log_errors', 0); // Keep logging errors if needed
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -82,6 +86,10 @@ $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+]);
+
+$app->routeMiddleware([
+    'timeout' => App\Http\Middleware\TimeoutMiddleware::class,
 ]);
 
 // $app->middleware([

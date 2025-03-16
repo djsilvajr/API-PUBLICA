@@ -17,6 +17,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+
+//Rotas de autenticação
 $router->post('/api/login', 'AuthController@login');
 $router->get('/api/usuario', ['middleware' => 'auth', 'uses' => 'AuthController@usuario']);
 $router->post('/api/logout', ['middleware' => 'auth', 'uses' => 'AuthController@logout']);
+
+//Timeout
+$router->get('/timeout/limiteExcedido',['middleware' => ['auth', 'timeout'], 'uses' => 'TimeoutController@limiteExcedido']);
+$router->get('/timeout/limiteOk',['middleware' => ['auth', 'timeout'], 'uses' => 'TimeoutController@limiteOk']);
