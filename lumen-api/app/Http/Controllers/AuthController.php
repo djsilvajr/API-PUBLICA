@@ -25,7 +25,7 @@ class AuthController extends Controller
         return response()->json(['token' => $token]);
     }
 
-    public function me()
+    public function usuario()
     {
         return response()->json(JWTAuth::parseToken()->authenticate());
     }
